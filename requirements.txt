@@ -1,4 +1,4 @@
-# python_version 3.9
+
 
 streamlit==0.87.0
 numpy==1.21.5
