@@ -2,11 +2,34 @@ import streamlit as st
 import plotly.graph_objs as go
 import plotly.express as px
 import pandas as pd
+from pyproj import Transformer
+from pyproj import CRS 
+import geopandas as gpd
 
-# Load your data (assuming gdf1 and gdf are loaded DataFrames)
-# Replace this with your actual data loading code
-# gdf1 = pd.read_csv("path_to_your_data_file1.csv")
-# gdf = pd.read_csv("path_to_your_data_file2.csv")
+shapefile_path = "2022_Voting_Precincts.shp"
+gdf1 = gpd.read_file(shapefile_path)
+
+# Define the original CRS
+original_crs = CRS("EPSG:3078")
+
+# Define the target CRS (latitude and longitude)
+target_crs = CRS("EPSG:4326")  # WGS84, which uses latitude and longitude
+
+transformer = Transformer.from_crs(original_crs, target_crs, always_xy=True)
+
+# Apply the transformation to each geometry
+from shapely.ops import transform as shapely_transform
+
+# Define a function to transform each coordinate pair
+def transform_coordinates(x, y):
+    lon, lat = transformer.transform(x, y)
+    return lon, lat
+
+# Apply the transformation to each geometry
+gdf1['geometry'] = gdf1['geometry'].apply(lambda geom: shapely_transform(transform_coordinates, geom))
+
+shapefile_path = "91b9440a853443918ad4c8dfdf52e495.shp"
+gdf = gpd.read_file(shapefile_path)
 
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
