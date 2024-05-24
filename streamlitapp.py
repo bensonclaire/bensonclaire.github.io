@@ -98,4 +98,4 @@ layout = go.Layout(
 fig.update_layout(layout)
 
 # Display the plot using Streamlit
-st.plotly_chart(fig)
+st.pyplot(fig)
