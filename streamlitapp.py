@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings("ignore")
 
+st.set_page_config(layout="wide")
+
 shapefile_path = "2022_Voting_Precincts.shp"
 gdf1 = gpd.read_file(shapefile_path)
 
@@ -163,4 +165,3 @@ fig.update_layout(clickmode='event+select')
 # Display the plot using Streamlit
 st.plotly_chart(fig, use_container_width=True,height=2000)
 
-st.set_page_config(layout="wide")
