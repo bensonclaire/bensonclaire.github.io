@@ -74,7 +74,7 @@ fig2 = px.choropleth_mapbox(gdf,
                             zoom=5,
                             hover_name="DISTRICTNO", 
                             color=gdf['color'],
-                            color_discrete_map={'#514585':'#514585'},
+                            color_discrete_map={'#514585':'#6F2A3B'},
                             center={"lat": gdf.centroid.y.mean(), "lon": gdf.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -173,7 +173,7 @@ fig.data[0].marker.color = new_color1;
 fig.data[1].marker.color = new_color2;
 """
 
-fig.update_layout(clickmode='event+select')
+fig.update_layout(clickmode='event+select', showlegend=False)
 
 # Display the plot using Streamlit
 st.plotly_chart(fig, use_container_width=True,height=3500)
