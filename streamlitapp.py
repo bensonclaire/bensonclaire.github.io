@@ -6,6 +6,8 @@ from pyproj import Transformer
 from pyproj import CRS 
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import warnings
+warnings.filterwarnings("ignore")
 
 shapefile_path = "2022_Voting_Precincts.shp"
 gdf1 = gpd.read_file(shapefile_path)
