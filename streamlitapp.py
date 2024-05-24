@@ -161,4 +161,4 @@ fig.data[1].marker.color = new_color2;
 fig.update_layout(clickmode='event+select')
 
 # Display the plot using Streamlit
-st.plotly_chart(fig, height=800, width=1200)
+st.plotly_chart(fig, height=1200, width=1500)
