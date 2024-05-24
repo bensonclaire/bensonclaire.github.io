@@ -97,7 +97,7 @@ scattermapbox_data = [
 layout = go.Layout(
     mapbox=dict(
         accesstoken=mapbox_access_token,
-        domain={'x': [0, 0.4], 'y': [0, .8]},
+        domain={'x': [0, 0.4], 'y': [0, 1]},
         bearing=0,
         center=dict(
             lat=gdf1.centroid.y.mean(),  # Center on first choropleth map's centroid
@@ -174,5 +174,5 @@ fig.data[1].marker.color = new_color2;
 fig.update_layout(clickmode='event+select', showlegend=False)
 
 # Display the plot using Streamlit
-st.plotly_chart(fig, use_container_width=True,height=1200)
+st.plotly_chart(fig, use_container_width=True, height=2200)
 
