@@ -95,8 +95,6 @@ scattermapbox_data = [
 
 # Layout
 layout = go.Layout(
-    autosize=True,
-    hovermode='closest',
     mapbox=dict(
         accesstoken=mapbox_access_token,
         domain={'x': [0, 0.4], 'y': [0, 1]},
@@ -176,5 +174,5 @@ fig.data[1].marker.color = new_color2;
 fig.update_layout(clickmode='event+select', showlegend=False)
 
 # Display the plot using Streamlit
-st.plotly_chart(fig, use_container_width=True,height=3500)
+st.plotly_chart(fig, use_container_width=True,height=1200)
 
