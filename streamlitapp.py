@@ -15,6 +15,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+st.title(':blue[Michigan House Districts and Voting Precincts Maps]')
+
 shapefile_path = "2022_Voting_Precincts.shp"
 gdf1 = gpd.read_file(shapefile_path)
 
