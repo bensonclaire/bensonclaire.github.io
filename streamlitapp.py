@@ -47,6 +47,9 @@ gdf['DISTRICTNO'] = gdf['DISTRICTNO'].apply(lambda x: f"State House District {x}
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
+gdf["color"] = "#514585"
+gdf1["color"] = "#514585"
+
 fig1 = px.choropleth_mapbox(gdf1, 
                             geojson=gdf1.geometry.__geo_interface__,
                             locations=gdf1.index,
@@ -54,6 +57,8 @@ fig1 = px.choropleth_mapbox(gdf1,
                             zoom=5,
                             hover_name="Precinct_L", 
                             hover_data=["PRECINCTID"],
+                            color=gdf1['color'],
+                            color_discrete_map={'#514585':'#6F2A3B'},
                             center={"lat": gdf1.centroid.y.mean(), "lon": gdf1.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -68,6 +73,8 @@ fig2 = px.choropleth_mapbox(gdf,
                             mapbox_style="carto-positron",
                             zoom=5,
                             hover_name="DISTRICTNO", 
+                            color=gdf['color'],
+                            color_discrete_map={'#514585':'#514585'},
                             center={"lat": gdf.centroid.y.mean(), "lon": gdf.centroid.x.mean()},
                             opacity=0.5,
                            )
