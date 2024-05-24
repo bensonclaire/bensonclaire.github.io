@@ -9,7 +9,11 @@ import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings("ignore")
 
-st.set_page_config(layout="wide")
+st.set_page_config(
+    page_title="Michigan House Districts and Voting Precincts Maps",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
 shapefile_path = "2022_Voting_Precincts.shp"
 gdf1 = gpd.read_file(shapefile_path)
