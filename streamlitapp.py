@@ -34,6 +34,8 @@ gdf1['geometry'] = gdf1['geometry'].apply(lambda geom: shapely_transform(transfo
 shapefile_path = "91b9440a853443918ad4c8dfdf52e495.shp"
 gdf = gpd.read_file(shapefile_path)
 
+gdf['DISTRICTNO'] = gdf['DISTRICTNO'].apply(lambda x: f"State House District {x}")
+
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
