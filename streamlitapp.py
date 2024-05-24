@@ -37,7 +37,6 @@ gdf = gpd.read_file(shapefile_path)
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-# Your first choropleth map code
 fig1 = px.choropleth_mapbox(gdf1, 
                             geojson=gdf1.geometry.__geo_interface__,
                             locations=gdf1.index,
@@ -48,6 +47,9 @@ fig1 = px.choropleth_mapbox(gdf1,
                             center={"lat": gdf1.centroid.y.mean(), "lon": gdf1.centroid.x.mean()},
                             opacity=0.5,
                            )
+
+# Extracting data from fig1
+choropleth_data1 = list(fig1.data)  # Convert tuple to list
 
 # Your second choropleth map code
 fig2 = px.choropleth_mapbox(gdf, 
@@ -60,22 +62,26 @@ fig2 = px.choropleth_mapbox(gdf,
                             opacity=0.5,
                            )
 
-# Create the figure
-fig = go.Figure()
+# Extracting data from fig2
+choropleth_data2 = list(fig2.data)  # Convert tuple to list
 
-# Add traces to the figure
-for data in fig1.data:
-    fig.add_trace(data)
+# Define your Mapbox access token
+mapbox_access_token = 'pk.eyJ1IjoiY2JlbnNvMTgyMiIsImEiOiJjbHdoenNleTcwMXljMmpwa25xb29mM2FvIn0.oUFcXxBLN4G4FIM2TG8mtg'
 
-for data in fig2.data:
-    data['subplot'] = 'mapbox2'
-    fig.add_trace(data)
+# Scattermapbox data
+scattermapbox_data = [
+    go.Scattermapbox(
+    ),
+    go.Scattermapbox(
+    )
+]
 
-# Define layout for the plot
+# Layout
 layout = go.Layout(
     autosize=True,
     hovermode='closest',
     mapbox=dict(
+        accesstoken=mapbox_access_token,
         domain={'x': [0, 0.4], 'y': [0, 1]},
         bearing=0,
         center=dict(
@@ -86,6 +92,7 @@ layout = go.Layout(
         zoom=5
     ),
     mapbox2=dict(
+        accesstoken=mapbox_access_token,
         domain={'x': [0.6, 1.0], 'y': [0, 1]},
         bearing=0,
         center=dict(
@@ -97,8 +104,59 @@ layout = go.Layout(
     ),
 )
 
-# Update the layout
-fig.update_layout(layout)
+# Create the figure
+fig = go.Figure(data=scattermapbox_data + choropleth_data2 , layout=layout)
+
+fig.update_layout(
+    clickmode='event+select',
+    mapbox={
+        "layers": [
+            {
+                "source": gdf1["geometry"].__geo_interface__,  # Corrected source to gdf
+                "type": "line",
+                "color": "black"
+            }
+        ]
+    },
+)
+
+fig.update_layout(
+    clickmode='event+select',
+    mapbox2={
+        "layers": [
+            {
+                "source": gdf["geometry"].__geo_interface__,  # Corrected source to gdf
+                "type": "line",
+                "color": "black"
+            }
+        ]
+    },
+)
+
+for trace in choropleth_data1:
+    trace['subplot'] = 'mapbox2'
+    fig.add_trace(trace)
+
+click_script = """
+selected_points = fig.data[0].selectedpoints;
+new_color1 = ['#636efa'] * len(fig.data[0].z); // Default color for all districts on mapbox subplot
+new_color2 = ['#636efa'] * len(fig.data[1].z); // Default color for all districts on mapbox2 subplot
+
+if (selected_points.length > 0) {
+    selected_points.forEach(function(point) {
+        new_color1[point] = '#ef553b'; // Change color upon click for mapbox subplot
+        new_color2[point] = '#ef553b'; // Change color upon click for mapbox2 subplot
+    });
+
+    // Synchronize selected points between subplots
+    fig.data[1].selectedpoints = selected_points;
+}
+
+fig.data[0].marker.color = new_color1;
+fig.data[1].marker.color = new_color2;
+"""
+
+fig.update_layout(clickmode='event+select')
 
 # Display the plot using Streamlit
 st.plotly_chart(fig, use_container_width=True)
