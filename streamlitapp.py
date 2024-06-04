@@ -60,10 +60,10 @@ gdf1["DISTRICTNO"]=np.nan
 
 gdf1.sort_values(by='Precinct_L').reset_index(drop=True)
 
-for i in range(len(gdf1)): 
-    for j in range(len(df_sorted)): 
-        if df_sorted["PRECINCTID"][j]==gdf1["PRECINCTID"][i]:
-            gdf1['DISTRICTNO'][i]=df_sorted['DISTRICTNO'][j]
+# for i in range(len(gdf1)): 
+#     for j in range(len(df_sorted)): 
+#         if df_sorted["PRECINCTID"][j]==gdf1["PRECINCTID"][i]:
+#             gdf1['DISTRICTNO'][i]=df_sorted['DISTRICTNO'][j]
 
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -82,7 +82,7 @@ fig = px.choropleth_mapbox(gdf1,
                             color=gdf1['color'],
                             color_discrete_map={'#514585':'#6F2A3B'},
                             hover_name="Precinct_L", 
-                            hover_data=["DISTRICTNO"],
+                            #hover_data=["DISTRICTNO"],
                             center={"lat": gdf1.centroid.y.mean(), "lon": gdf1.centroid.x.mean()},
                             opacity=0.5,
                            )
