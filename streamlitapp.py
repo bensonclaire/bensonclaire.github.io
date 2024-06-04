@@ -61,7 +61,7 @@ gdf1 = gpd.read_file(shapefile_path)
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-df_sorted["color"] = "#514585"
+#df_sorted["color"] = "#514585"
 gdf1["color"] = "#514585"
 
 import plotly.express as px
