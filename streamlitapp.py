@@ -44,26 +44,19 @@ gdf = gpd.read_file(shapefile_path)
 
 gdf['DISTRICTNO'] = gdf['DISTRICTNO'].apply(lambda x: f"State House District {x}")
 
-df = gpd.overlay(gdf1, gdf, how='intersection')
+# df = gpd.overlay(gdf1, gdf, how='intersection')
 
-# Ensure 'geometry' column is retained as 'geometry_left' and 'geometry_right' for precincts and districts respectively
-df['intersection_area'] = df.apply(lambda row: row['geometry'].area, axis=1)
+# # Ensure 'geometry' column is retained as 'geometry_left' and 'geometry_right' for precincts and districts respectively
+# df['intersection_area'] = df.apply(lambda row: row['geometry'].area, axis=1)
 
-# For each precinct, keep the row with the largest intersection area
-df_resolved = df.loc[df.groupby('PRECINCTID')['intersection_area'].idxmax()]
+# # For each precinct, keep the row with the largest intersection area
+# df_resolved = df.loc[df.groupby('PRECINCTID')['intersection_area'].idxmax()]
 
-# Sort the DataFrame alphabetically by Precinct_L
-df_sorted = df_resolved.sort_values(by='Precinct_L').reset_index(drop=True)
+# # Sort the DataFrame alphabetically by Precinct_L
+# df_sorted = df_resolved.sort_values(by='Precinct_L').reset_index(drop=True)
 
-import numpy as np
-gdf1["DISTRICTNO"]=np.nan
-
-gdf1.sort_values(by='Precinct_L').reset_index(drop=True)
-
-# for i in range(len(gdf1)): 
-#     for j in range(len(df_sorted)): 
-#         if df_sorted["PRECINCTID"][j]==gdf1["PRECINCTID"][i]:
-#             gdf1['DISTRICTNO'][i]=df_sorted['DISTRICTNO'][j]
+shapefile_path = "gdf1.shp"
+gdf1 = gpd.read_file(shapefile_path)
 
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
