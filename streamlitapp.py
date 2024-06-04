@@ -109,6 +109,10 @@ fig.update_layout(
     },
 )
 
+fig.update_traces(
+    hovertemplate="<b>District: %{customdata[0]}</b><br>Precinct ID: %{customdata[1]}<extra></extra>"
+)
+
 fig.update_layout(
     autosize=False,
     height=900,
