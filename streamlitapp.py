@@ -75,7 +75,7 @@ fig = px.choropleth_mapbox(gdf1,
                             color=gdf1['color'],
                             color_discrete_map={'#514585':'#6F2A3B'},
                             hover_name="Precinct_L", 
-                            hover_data=["DISTRICTNO", "PRECINCTID"],
+                            hover_data=["Precinct_L", "DISTRICTNO", "PRECINCTID"],
                             center={"lat": gdf1.centroid.y.mean(), "lon": gdf1.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -110,7 +110,7 @@ fig.update_layout(
 )
 
 fig.update_traces(
-    hovertemplate="<b>District: %{customdata[0]}</b><br>Precinct ID: %{customdata[1]}<extra></extra>"
+    hovertemplate="<b>Precinct Name: %{customdata[0]}</b><br>District: %{customdata[1]}<br>Precinct ID: %{customdata[2]}<extra></extra>"
 )
 
 fig.update_layout(
