@@ -139,5 +139,5 @@ if active_tab == "Map":
 # Render Data tab
 elif active_tab == "Excel Data":
     df = pd.read_excel("gdf1.xlsx")
-    st.dataframe(df)
+    st.dataframe(df, width=1000, height=800)
 
