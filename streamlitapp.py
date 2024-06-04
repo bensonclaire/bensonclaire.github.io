@@ -75,7 +75,7 @@ fig = px.choropleth_mapbox(gdf1,
                             color=gdf1['color'],
                             color_discrete_map={'#514585':'#6F2A3B'},
                             hover_name="Precinct_L", 
-                            hover_data={"DISTRICTNO"},
+                            hover_data={"DISTRICTNO, PRECINCTID"},
                             center={"lat": gdf1.centroid.y.mean(), "lon": gdf1.centroid.x.mean()},
                             opacity=0.5,
                            )
