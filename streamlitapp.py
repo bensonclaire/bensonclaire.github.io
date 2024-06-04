@@ -230,5 +230,5 @@ fig.update_layout(
 # fig.update_layout(clickmode='event+select', showlegend=False)
 
 # Display the plot using Streamlit
-st.plotly_chart(fig, use_container_width=True, height=900)
+st.plotly_chart(fig, use_container_width=True, height=1200)
 
