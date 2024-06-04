@@ -55,25 +55,35 @@ df_resolved = df.loc[df.groupby('PRECINCTID')['intersection_area'].idxmax()]
 # Sort the DataFrame alphabetically by Precinct_L
 df_sorted = df_resolved.sort_values(by='Precinct_L').reset_index(drop=True)
 
+import numpy as np
+gdf1["DISTRICTNO"]=np.nan
+
+gdf1.sort_values(by='Precinct_L').reset_index(drop=True)
+
+for i in range(len(gdf1)): 
+    for j in range(len(df_sorted)): 
+        if df_sorted["PRECINCTID"][j]==gdf1["PRECINCTID"][i]:
+            gdf1['DISTRICTNO'][i]=df_sorted['DISTRICTNO'][j]
+
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 df_sorted["color"] = "#514585"
-#gdf1["color"] = "#514585"
+gdf1["color"] = "#514585"
 
 import plotly.express as px
 
 # Define initial figures
-fig = px.choropleth_mapbox(df_sorted, 
-                            geojson=df_sorted.geometry.__geo_interface__,
-                            locations=df_sorted.index,
+fig = px.choropleth_mapbox(gdf1, 
+                            geojson=gdf1.geometry.__geo_interface__,
+                            locations=gdf1.index,
                             mapbox_style="carto-positron",
                             zoom=5,
-                            color=df_sorted['color'],
+                            color=gdf1['color'],
                             color_discrete_map={'#514585':'#6F2A3B'},
                             hover_name="Precinct_L", 
                             hover_data=["DISTRICTNO"],
-                            center={"lat": df_sorted.centroid.y.mean(), "lon": df_sorted.centroid.x.mean()},
+                            center={"lat": gdf1.centroid.y.mean(), "lon": gdf1.centroid.x.mean()},
                             opacity=0.5,
                            )
 
@@ -227,7 +237,7 @@ fig.update_layout(
 # fig.data[1].marker.color = new_color2;
 # """
 
-# fig.update_layout(clickmode='event+select', showlegend=False)
+fig.update_layout(showlegend=False)
 
 # Display the plot using Streamlit
 st.plotly_chart(fig, use_container_width=True, height=1200)
