@@ -110,7 +110,7 @@ fig.update_layout(
 )
 
 fig.update_traces(
-    hovertemplate="<b>Precinct Name: %{customdata[0]}</b><br>District: %{customdata[1]}<br>Precinct ID: %{customdata[2]}<extra></extra>"
+    hovertemplate="<b>Precinct Name: %{customdata[0]}</b><br>State House District: %{customdata[1]}<br>Precinct ID: %{customdata[2]}<extra></extra>"
 )
 
 fig.update_layout(
