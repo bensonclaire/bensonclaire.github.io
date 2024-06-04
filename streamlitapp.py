@@ -137,6 +137,6 @@ if active_tab == "Map":
     st.plotly_chart(fig, use_container_width=True, height=1200)
 # Render Data tab
 elif active_tab == "Excel Data":
-    # Here you can include code to display the data
-    st.write("This is the data tab")
+    df = pd.read_excel("gdf1.xlsx")
+    st.dataframe(df)
 
