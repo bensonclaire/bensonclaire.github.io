@@ -16,7 +16,7 @@ st.set_page_config(
 )
 
 st.title(':blue[Michigan House Districts and Voting Precincts Maps]')
-st.subheader(':blue[Based Upon the Motown Sound FC E1 Michigsn State House Districted]')
+st.subheader(':blue[Based Upon the Motown Sound FC E1 Michigan State House Districts]')
 
 shapefile_path = "2022_Voting_Precincts.shp"
 gdf1 = gpd.read_file(shapefile_path)
