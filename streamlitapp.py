@@ -243,6 +243,7 @@ fig.update_layout(
 )
 
 fig.update_layout(showlegend=False)
+fig.update_traces(hovertemplate="%{customdata[0]}<extra></extra>")
 
 # Display the plot using Streamlit
 st.plotly_chart(fig, use_container_width=True, height=1200)
