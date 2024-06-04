@@ -230,6 +230,17 @@ fig.update_layout(
 # fig.data[1].marker.color = new_color2;
 # """
 
+fig.update_layout(
+    autosize=False,
+    height=900,
+    margin=dict(
+        l=50,
+        r=50,
+        b=50,
+        t=50,
+        pad=4
+    ),
+
 fig.update_layout(showlegend=False)
 
 # Display the plot using Streamlit
