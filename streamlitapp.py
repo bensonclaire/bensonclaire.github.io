@@ -23,23 +23,23 @@ st.subheader(':blue[Based Upon the Motown Sound FC E1 Michigan State House Distr
 # gdf1 = gpd.read_file(shapefile_path)
 
 # Define the original CRS
-original_crs = CRS("EPSG:3078")
+# original_crs = CRS("EPSG:3078")
 
-# Define the target CRS (latitude and longitude)
-target_crs = CRS("EPSG:4326")  # WGS84, which uses latitude and longitude
+# # Define the target CRS (latitude and longitude)
+# target_crs = CRS("EPSG:4326")  # WGS84, which uses latitude and longitude
 
-transformer = Transformer.from_crs(original_crs, target_crs, always_xy=True)
+# transformer = Transformer.from_crs(original_crs, target_crs, always_xy=True)
 
-# Apply the transformation to each geometry
-from shapely.ops import transform as shapely_transform
+# # Apply the transformation to each geometry
+# from shapely.ops import transform as shapely_transform
 
-# Define a function to transform each coordinate pair
-def transform_coordinates(x, y):
-    lon, lat = transformer.transform(x, y)
-    return lon, lat
+# # Define a function to transform each coordinate pair
+# def transform_coordinates(x, y):
+#     lon, lat = transformer.transform(x, y)
+#     return lon, lat
 
-# Apply the transformation to each geometry
-gdf1['geometry'] = gdf1['geometry'].apply(lambda geom: shapely_transform(transform_coordinates, geom))
+# # Apply the transformation to each geometry
+# gdf1['geometry'] = gdf1['geometry'].apply(lambda geom: shapely_transform(transform_coordinates, geom))
 
 shapefile_path = "91b9440a853443918ad4c8dfdf52e495.shp"
 gdf = gpd.read_file(shapefile_path)
