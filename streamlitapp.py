@@ -19,8 +19,8 @@ st.set_page_config(
 st.title(':blue[Michigan House Districts and Voting Precincts Maps]')
 st.subheader(':blue[Based Upon the Motown Sound FC E1 Michigan State House Districts]')
 
-shapefile_path = "2022_Voting_Precincts.shp"
-gdf1 = gpd.read_file(shapefile_path)
+# shapefile_path = "2022_Voting_Precincts.shp"
+# gdf1 = gpd.read_file(shapefile_path)
 
 # Define the original CRS
 original_crs = CRS("EPSG:3078")
@@ -57,7 +57,8 @@ gdf['DISTRICTNO'] = gdf['DISTRICTNO'].apply(lambda x: f"State House District {x}
 # # Sort the DataFrame alphabetically by Precinct_L
 # df_sorted = df_resolved.sort_values(by='Precinct_L').reset_index(drop=True)
 
-shapefile_path = "gdf1.shp"
+#shapefile_path = "gdf1.shp"
+shapefile_path = "gdf1v2.shp"
 gdf1 = gpd.read_file(shapefile_path)
 
 # Filter out warnings (optional)
